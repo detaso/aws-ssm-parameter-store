@@ -8,6 +8,10 @@ MD004:
 MD013:
   tables: false
 
+# Multiple headings with the same content - only care about siblings
+MD024:
+  siblings_only: true
+
 # Ordered list item prefix
 MD029:
   style: one

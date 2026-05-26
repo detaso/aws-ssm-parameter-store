@@ -130,13 +130,13 @@ Your AWS User/Role must allow the `ssm:GetParameters` action:
    npm install
    ```
 
-2. Run tests
+1. Run tests
 
    ```bash
    npm test
    ```
 
-3. Build the action bundles
+1. Build the action bundles
 
    ```bash
    npm run package
