@@ -37,7 +37,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "^3.0.1",
     "@aws-sdk/client-ssm": "^3.1053.0",
     "lodash.chunk": "^4.2.0"
   },
