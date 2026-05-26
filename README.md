@@ -19,8 +19,8 @@ CloudFormation parameters.
 
 | Name                    | Required | Description                                               | Default  |
 | ----------------------- | -------- | --------------------------------------------------------- | -------- |
-| `ssm-path`              | Yes      | The SSM parameter path/name                               |          |
 | `aws-region`            | Yes      | The AWS region to use                                     |          |
+| `ssm-path`              | Yes      | The SSM parameter path/name                               |          |
 | `ssm-value`             | Yes      | The value to store                                        |          |
 | `ssm-value-type`        | Yes      | Parameter type: `String`, `StringList`, or `SecureString` | `String` |
 | `ssm-value-overwrite`   | Yes      | Whether to overwrite an existing parameter                | `false`  |
@@ -41,9 +41,9 @@ steps:
   - name: Store secret in SSM
     uses: detaso/aws-ssm-parameter-store/put-parameter@v1
     with:
+      aws-region: eu-west-1
       ssm-path: /myapp/database-password
       ssm-value: ${{ secrets.DB_PASSWORD }}
-      aws-region: eu-west-1
       ssm-value-type: SecureString
       ssm-value-overwrite: 'true'
 ```
@@ -73,10 +73,11 @@ batching parameters in groups of 10 (the SSM API limit).
 
 ### Inputs
 
-| Name             | Required | Description                                     | Default |
-| ---------------- | -------- | ----------------------------------------------- | ------- |
-| `parameterPairs` | Yes      | Comma-separated pairs: `/ssm/path=ENV_VAR_NAME` |         |
-| `withDecryption` | No       | Whether to decrypt SecureString parameters      | `true`  |
+| Name              | Required | Description                                     | Default |
+| ----------------- | -------- | ----------------------------------------------- | ------- |
+| `aws-region`      | Yes      | The AWS region to use                           |         |
+| `parameter-pairs` | Yes      | Comma-separated pairs: `/ssm/path=ENV_VAR_NAME` |         |
+| `with-decryption` | No       | Whether to decrypt SecureString parameters      | `true`  |
 
 ### Example
 
@@ -92,10 +93,11 @@ steps:
   - name: Get SSM Parameters
     uses: detaso/aws-ssm-parameter-store/get-parameters@v1
     with:
-      parameterPairs: |
+      aws-region: eu-east-1
+      parameter-pairs: |
         /myapp/database-url = DATABASE_URL,
         /myapp/api-key = API_KEY
-      withDecryption: 'true'
+      with-decryption: 'true'
 
   - name: Use parameters
     run: echo "Database is at $DATABASE_URL"

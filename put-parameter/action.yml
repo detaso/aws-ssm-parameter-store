@@ -1,17 +1,16 @@
-name: AWS SSM Parameter Store
+name: AWS SSM Put Parameter
 description: Store a parameter in AWS Systems Manager Parameter Store
-author: dwardu89
 
 branding:
   icon: lock
   color: orange
 
 inputs:
-  ssm-path:
-    description: The path/name of the SSM parameter
-    required: true
   aws-region:
     description: The AWS region for the SSM client
+    required: true
+  ssm-path:
+    description: The path/name of the SSM parameter
     required: true
   ssm-value:
     description: The value to store in the parameter

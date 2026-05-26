@@ -36,8 +36,8 @@ describe('get-parameters run', () => {
 
   it('retrieves a single parameter and exports it', async () => {
     mockInputs({
-      parameterPairs: '/my/param=MY_PARAM',
-      withDecryption: 'true'
+      'parameter-pairs': '/my/param=MY_PARAM',
+      'with-decryption': 'true'
     })
     ssm.mockSend.mockResolvedValue({
       Parameters: [{ Name: '/my/param', Value: 'hello' }]
@@ -58,8 +58,8 @@ describe('get-parameters run', () => {
 
   it('handles multiple parameters', async () => {
     mockInputs({
-      parameterPairs: '/a=A_VAR, /b=B_VAR',
-      withDecryption: 'true'
+      'parameter-pairs': '/a=A_VAR, /b=B_VAR',
+      'with-decryption': 'true'
     })
     ssm.mockSend.mockResolvedValue({
       Parameters: [
@@ -78,7 +78,7 @@ describe('get-parameters run', () => {
     const pairs = Array.from({ length: 12 }, (_, i) => `/p${i}=VAR_${i}`).join(
       ','
     )
-    mockInputs({ parameterPairs: pairs, withDecryption: 'true' })
+    mockInputs({ 'parameter-pairs': pairs, 'with-decryption': 'true' })
     ssm.mockSend.mockResolvedValue({ Parameters: [] })
 
     await run()
@@ -88,10 +88,10 @@ describe('get-parameters run', () => {
     expect(ssm.mockSend.mock.calls[1][0].input.Names).toHaveLength(2)
   })
 
-  it('does not set secrets when withDecryption is false', async () => {
+  it('does not set secrets when with-decryption is false', async () => {
     mockInputs({
-      parameterPairs: '/my/param=MY_PARAM',
-      withDecryption: 'false'
+      'parameter-pairs': '/my/param=MY_PARAM',
+      'with-decryption': 'false'
     })
     ssm.mockSend.mockResolvedValue({
       Parameters: [{ Name: '/my/param', Value: 'hello' }]
@@ -104,10 +104,10 @@ describe('get-parameters run', () => {
     expect(ssm.mockSend.mock.calls[0][0].input.WithDecryption).toBe(false)
   })
 
-  it('fails on malformed parameterPairs', async () => {
+  it('fails on malformed parameter-pairs', async () => {
     mockInputs({
-      parameterPairs: 'no-equals-sign',
-      withDecryption: 'true'
+      'parameter-pairs': 'no-equals-sign',
+      'with-decryption': 'true'
     })
 
     await run()
@@ -119,8 +119,8 @@ describe('get-parameters run', () => {
 
   it('handles empty response parameters gracefully', async () => {
     mockInputs({
-      parameterPairs: '/missing=MISSING_VAR',
-      withDecryption: 'true'
+      'parameter-pairs': '/missing=MISSING_VAR',
+      'with-decryption': 'true'
     })
     ssm.mockSend.mockResolvedValue({ Parameters: [] })
 
@@ -132,8 +132,8 @@ describe('get-parameters run', () => {
 
   it('logs error for invalid parameter (missing value)', async () => {
     mockInputs({
-      parameterPairs: '/my/param=MY_PARAM',
-      withDecryption: 'true'
+      'parameter-pairs': '/my/param=MY_PARAM',
+      'with-decryption': 'true'
     })
     ssm.mockSend.mockResolvedValue({
       Parameters: [{ Name: '/my/param', Value: undefined }]
