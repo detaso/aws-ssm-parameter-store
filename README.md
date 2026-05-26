@@ -1,10 +1,11 @@
 # AWS SSM Parameter Store GitHub Actions
 
-A collection of GitHub Actions for working with AWS Systems Manager Parameter Store.
+A collection of GitHub Actions for working with AWS Systems Manager Parameter
+Store.
 
-| Action | Description |
-|--------|-------------|
-| [`put-parameter`](#put-parameter) | Store a parameter in SSM Parameter Store |
+| Action                              | Description                                                      |
+| ----------------------------------- | ---------------------------------------------------------------- |
+| [`put-parameter`](#put-parameter)   | Store a parameter in SSM Parameter Store                         |
 | [`get-parameters`](#get-parameters) | Retrieve parameters from SSM and export as environment variables |
 
 ## Put Parameter
@@ -16,15 +17,15 @@ CloudFormation parameters.
 
 ### Inputs
 
-| Name | Required | Description | Default |
-|------|----------|-------------|---------|
-| `ssm-path` | Yes | The SSM parameter path/name | |
-| `aws-region` | Yes | The AWS region to use | |
-| `ssm-value` | Yes | The value to store | |
-| `ssm-value-type` | Yes | Parameter type: `String`, `StringList`, or `SecureString` | `String` |
-| `ssm-value-overwrite` | Yes | Whether to overwrite an existing parameter | `false` |
-| `ssm-value-description` | No | A description for the parameter | |
-| `ssm-kms-key-id` | No | KMS key ID/ARN for SecureString encryption | |
+| Name                    | Required | Description                                               | Default  |
+| ----------------------- | -------- | --------------------------------------------------------- | -------- |
+| `ssm-path`              | Yes      | The SSM parameter path/name                               |          |
+| `aws-region`            | Yes      | The AWS region to use                                     |          |
+| `ssm-value`             | Yes      | The value to store                                        |          |
+| `ssm-value-type`        | Yes      | Parameter type: `String`, `StringList`, or `SecureString` | `String` |
+| `ssm-value-overwrite`   | Yes      | Whether to overwrite an existing parameter                | `false`  |
+| `ssm-value-description` | No       | A description for the parameter                           |          |
+| `ssm-kms-key-id`        | No       | KMS key ID/ARN for SecureString encryption                |          |
 
 ### Example
 
@@ -66,16 +67,16 @@ Your AWS User/Role must allow the `ssm:PutParameter` action:
 
 ## Get Parameters
 
-Retrieve one or more parameters from AWS SSM Parameter Store and export them
-as environment variables. Optimized to use the fewest possible API calls by
+Retrieve one or more parameters from AWS SSM Parameter Store and export them as
+environment variables. Optimized to use the fewest possible API calls by
 batching parameters in groups of 10 (the SSM API limit).
 
 ### Inputs
 
-| Name | Required | Description | Default |
-|------|----------|-------------|---------|
-| `parameterPairs` | Yes | Comma-separated pairs: `/ssm/path=ENV_VAR_NAME` | |
-| `withDecryption` | No | Whether to decrypt SecureString parameters | `true` |
+| Name             | Required | Description                                     | Default |
+| ---------------- | -------- | ----------------------------------------------- | ------- |
+| `parameterPairs` | Yes      | Comma-separated pairs: `/ssm/path=ENV_VAR_NAME` |         |
+| `withDecryption` | No       | Whether to decrypt SecureString parameters      | `true`  |
 
 ### Example
 
@@ -144,4 +145,5 @@ Your AWS User/Role must allow the `ssm:GetParameters` action:
 ## Credit
 
 - Put Parameter action originally by [@dwardu89](https://github.com/dwardu89)
-- Get Parameters action inspired by [@dkershner6](https://github.com/dkershner6/aws-ssm-getparameters-action)
+- Get Parameters action inspired by
+  [@dkershner6](https://github.com/dkershner6/aws-ssm-getparameters-action)

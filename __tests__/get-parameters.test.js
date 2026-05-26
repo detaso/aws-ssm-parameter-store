@@ -75,10 +75,9 @@ describe('get-parameters run', () => {
   })
 
   it('chunks parameters in groups of 10', async () => {
-    const pairs = Array.from(
-      { length: 12 },
-      (_, i) => `/p${i}=VAR_${i}`
-    ).join(',')
+    const pairs = Array.from({ length: 12 }, (_, i) => `/p${i}=VAR_${i}`).join(
+      ','
+    )
     mockInputs({ parameterPairs: pairs, withDecryption: 'true' })
     ssm.mockSend.mockResolvedValue({ Parameters: [] })
 

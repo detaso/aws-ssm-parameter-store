@@ -1,5 +1,6 @@
 name: AWS SSM Parameter Store GetParameters
-description: Retrieve parameters from AWS SSM and export as environment variables
+description:
+  Retrieve parameters from AWS SSM and export as environment variables
 
 branding:
   icon: download
