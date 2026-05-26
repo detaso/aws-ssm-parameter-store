@@ -1,0 +1,19 @@
+name: AWS SSM Parameter Store GetParameters
+description: Retrieve parameters from AWS SSM and export as environment variables
+
+branding:
+  icon: download
+  color: orange
+
+inputs:
+  parameterPairs:
+    required: true
+    description: 'Comma-separated pairs in the format /ssm/path=ENV_VAR_NAME'
+  withDecryption:
+    required: false
+    default: 'true'
+    description: Whether to decrypt SecureString parameters
+
+runs:
+  using: node24
+  main: ../dist/get-parameters/index.js

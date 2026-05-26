@@ -1,0 +1,38 @@
+name: AWS SSM Parameter Store
+description: Store a parameter in AWS Systems Manager Parameter Store
+author: dwardu89
+
+branding:
+  icon: lock
+  color: orange
+
+inputs:
+  ssm-path:
+    description: The path/name of the SSM parameter
+    required: true
+  aws-region:
+    description: The AWS region for the SSM client
+    required: true
+  ssm-value:
+    description: The value to store in the parameter
+    required: true
+  ssm-value-type:
+    description: 'The parameter type: String, SecureString, or StringList'
+    required: true
+    default: String
+  ssm-value-overwrite:
+    description: Whether to overwrite an existing parameter
+    required: true
+    default: 'false'
+  ssm-value-description:
+    description: A description for the parameter
+    required: false
+    default: ''
+  ssm-kms-key-id:
+    description: The KMS key ID to use for SecureString encryption
+    required: false
+    default: ''
+
+runs:
+  using: node24
+  main: ../dist/put-parameter/index.js

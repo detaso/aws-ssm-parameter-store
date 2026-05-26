@@ -1,17 +1,17 @@
 {
-  "name": "javascript-action",
-  "description": "GitHub Actions JavaScript Template",
-  "version": "0.0.0",
-  "author": "",
+  "name": "aws-ssm-parameter-store",
+  "description": "A GitHub Action to work with AWS SSM Parameter Store.",
+  "version": "1.0.0",
+  "author": "Ryan Schlesinger <rschlesinger@detaso.com>",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/detaso/aws-ssm-parameter-store",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/detaso/aws-ssm-parameter-store.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/detaso/aws-ssm-parameter-store/issues"
   },
   "keywords": [
     "actions"
@@ -37,13 +37,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^3.0.0"
+    "@actions/core": "^3.0.0",
+    "@aws-sdk/client-ssm": "^3.1053.0",
+    "lodash.chunk": "^4.2.0"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.1",
     "@github/local-action": "^7.0.1",
     "@jest/globals": "^30.2.0",
     "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
