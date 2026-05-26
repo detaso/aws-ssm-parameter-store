@@ -43,3 +43,47 @@ jobs:
       - name: Test
         id: npm-ci-test
         run: npm run ci-test
+
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v6
+
+      - name: Test put-parameter (expect failure)
+        id: test-put-parameter
+        uses: ./put-parameter
+        continue-on-error: true
+        with:
+          aws-region: us-east-1
+          ssm-path: /test/parameter
+          ssm-value: test-value
+          ssm-value-type: String
+          ssm-value-overwrite: 'false'
+
+      - name: Verify put-parameter failed gracefully
+        run: |
+          if [ "${{ steps.test-put-parameter.outcome }}" != "failure" ]; then
+            echo "Expected put-parameter to fail without AWS credentials"
+            exit 1
+          fi
+          echo "put-parameter failed gracefully as expected"
+
+      - name: Test get-parameters (expect failure)
+        id: test-get-parameters
+        uses: ./get-parameters
+        continue-on-error: true
+        with:
+          aws-region: us-east-1
+          parameter-pairs: /test/param=TEST_VAR
+
+      - name: Verify get-parameters failed gracefully
+        run: |
+          if [ "${{ steps.test-get-parameters.outcome }}" != "failure" ]; then
+            echo "Expected get-parameters to fail without AWS credentials"
+            exit 1
+          fi
+          echo "get-parameters failed gracefully as expected"

@@ -45110,7 +45110,7 @@ const MAX_SSM_GETPARAMETERS_COUNT = 10;
  * @returns {{ parameterPairs: [string, string][], withDecryption: boolean }}
  */
 function validateParams() {
-  const parameterPairsParam = getInput('parameterPairs', {
+  const parameterPairsParam = getInput('parameter-pairs', {
     required: true
   });
   const parameterPairsStrings = parameterPairsParam.split(',');
@@ -45124,7 +45124,7 @@ function validateParams() {
     return pair.map((p) => p.trim())
   });
 
-  const withDecryptionParam = getInput('withDecryption');
+  const withDecryptionParam = getInput('with-decryption');
   const withDecryption = withDecryptionParam !== 'false';
 
   return { parameterPairs, withDecryption }
@@ -45181,7 +45181,8 @@ async function run() {
     );
     info(`${parameterPairChunks.length} chunks of parameters to retrieve`);
 
-    const client = new SSMClient({});
+    const region = getInput('aws-region');
+    const client = new SSMClient(region ? { region } : {});
 
     for (const parameterPairChunk of parameterPairChunks) {
       await processChunk(client, parameterPairChunk, withDecryption);

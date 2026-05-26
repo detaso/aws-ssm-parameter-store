@@ -1,4 +1,4 @@
-name: AWS SSM Parameter Store GetParameters
+name: AWS SSM Get Parameters
 description:
   Retrieve parameters from AWS SSM and export as environment variables
 
@@ -7,10 +7,13 @@ branding:
   color: orange
 
 inputs:
-  parameterPairs:
+  aws-region:
+    description: The AWS region for the SSM client
+    required: true
+  parameter-pairs:
     required: true
     description: 'Comma-separated pairs in the format /ssm/path=ENV_VAR_NAME'
-  withDecryption:
+  with-decryption:
     required: false
     default: 'true'
     description: Whether to decrypt SecureString parameters
