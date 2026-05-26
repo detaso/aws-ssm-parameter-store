@@ -82,7 +82,7 @@ export async function run() {
     core.info(`${parameterPairChunks.length} chunks of parameters to retrieve`)
 
     const region = core.getInput('aws-region')
-    const client = new SSMClient(region ? { region } : {})
+    const client = new SSMClient({ region })
 
     for (const parameterPairChunk of parameterPairChunks) {
       await processChunk(client, parameterPairChunk, withDecryption)
